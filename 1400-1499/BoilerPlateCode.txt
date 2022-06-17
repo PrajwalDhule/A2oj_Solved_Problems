@@ -1,3 +1,5 @@
+taken from: https://codeforces.com/profile/SecondThread
+
 "java template": {
 	"prefix": "cp boilerplate",
 	"body": [

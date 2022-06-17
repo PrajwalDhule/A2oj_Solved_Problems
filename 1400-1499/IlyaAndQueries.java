@@ -1,5 +1,3 @@
-//TLE on 13
-
 import java.util.*;
 
 public class IlyaAndQueries{
