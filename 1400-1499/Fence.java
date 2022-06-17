@@ -1,49 +1,42 @@
 import java.util.*;
 import java.io.*;
 
-public class demo {
-    static class FastReader {
+public class Fence{
+    static class FastReader{
         BufferedReader br;
         StringTokenizer st;
-
-        public FastReader() {
-            br = new BufferedReader(new InputStreamReader(System.in));
+        public FastReader(){
+            br=new BufferedReader(new InputStreamReader(System.in));
         }
-
-        String next() {
-            while (st == null || !st.hasMoreTokens()) {
+        String next(){
+            while(st==null || !st.hasMoreTokens()){
                 try {
-                    st = new StringTokenizer(br.readLine());
+                    st=new StringTokenizer(br.readLine());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
             return st.nextToken();
         }
-
-        int nextInt() {
+        int nextInt(){
             return Integer.parseInt(next());
         }
-
-        long nextLong() {
+        long nextLong(){
             return Long.parseLong(next());
         }
-
-        double nextDouble() {
+        double nextDouble(){
             return Double.parseDouble(next());
         }
-
-        String nextLine() {
-            String str = "";
+        String nextLine(){
+            String str="";
             try {
-                str = br.readLine().trim();
+                str=br.readLine().trim();
             } catch (Exception e) {
                 e.printStackTrace();
             }
             return str;
         }
     }
-
     static class FastWriter {
         private final BufferedWriter bw;
 
@@ -64,35 +57,34 @@ public class demo {
             bw.close();
         }
     }
-
     public static void main(String[] args) {
         try {
-            FastReader in = new FastReader();
+            FastReader in=new FastReader();
             FastWriter out = new FastWriter();
-                String s = in.nextLine();
-                int x, y, m = in.nextInt();
-                int[] arr = new int[s.length()];
-                int[] ans = new int[m];
+            int n = in.nextInt();
+            int k = in.nextInt();
+            int[] arr = new int[n];
+            
+            for (int i=0; i<n; i++){
+                arr[i] = in.nextInt();
+            }
 
-                arr[0] = 0;
-                int sum = 0;
-                for (int i = 1; i < s.length(); i++) {
-                    if (s.charAt(i) == s.charAt(i - 1)) {
-                        arr[i] = ++sum;
-                    } else {
-                        arr[i] = sum;
-                    }
-                }
+            int sum = 0;
+            for (int i=0; i<k; i++){
+                sum += arr[i];
+            }
+            int min = sum;
+            int ans = 1;
 
-                for (int i = 0; i < m; i++) {
-                    x = in.nextInt();
-                    y = in.nextInt();
-                    ans[i] = arr[y - 1] - arr[x - 1];
-                }
+            for (int i=1; i<n-k+1; i++){
+                sum += arr[i+k-1] - arr[i-1];
 
-                for (int i : ans) {
-                    out.println(i);
+                if(sum < min){
+                    min = sum;
+                    ans = i+1;
                 }
+            }
+            out.print(ans);
             out.close();
         } catch (Exception e) {
             return;
